@@ -22,7 +22,6 @@ dlistint_t *create_dnode(int n, dlistint_t *prev, dlistint_t *next)
 }
 /**
  * insert_dnodeint_at_index - inserts a new node at a given position
- * auther: IbrahimMaNSOUR
  * @h: head of doubly-linked list
  * @idx: index for insertion of new node
  * @n: data for new node
@@ -35,10 +34,10 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 
 	if (!h)
 		return (NULL);
-	if (idx == 0) 
+	if (idx == 0) /* insert at list beginning*/
 	{
 		if (!*h)
-			*h = create_dnode(n, NULL, NULL); 
+			*h = create_dnode(n, NULL, NULL); /*first node*/
 		else
 		{
 			(*h)->prev = create_dnode(n, NULL, *h);
@@ -50,18 +49,18 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	{
 		localPrev = curr;
 	}
-	if ((count == idx) && (curr == NULL)) 
+	if ((count == idx) && (curr == NULL)) /*insert at list end*/
 	{
 		localPrev->next = create_dnode(n, localPrev, NULL);
 		return (localPrev->next);
 	}
-	if ((count < idx) && (curr == NULL))
+	if ((count < idx) && (curr == NULL))/*idx too high*/
 		return (NULL);
 	if (localPrev != NULL)
-	{       
+	{       /*insert in middle of list*/
 		localPrev->next = create_dnode(n, localPrev, curr);
 		curr->prev = localPrev->next;
 		return (localPrev->next);
 	}
-	return (NULL); 
+	return (NULL); /*should never run*/
 }
